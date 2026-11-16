@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Reparación de Techo — Montería, Córdoba</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body { background: #ffffff !important; color: #111827 !important; padding: 0 !important; }
+      .print-card { box-shadow: none !important; border-color: #d1d5db !important; }
+      .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased p-4 sm:p-8">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <header class="print-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+            Montería, Córdoba (CO)
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+            Hoja de Trabajo e Insumos
+          </span>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900">
+          Reparación de Pintura Escamada en Cielo Raso / Pared
+        </h1>
+        <p class="text-sm text-slate-600 mt-1">
+          Guía práctica para hacer la reparación desde la base (sin humedad activa confirmada). Si vuelve a soplarse en unos meses, confirma origen por humedad.
+        </p>
+      </div>
+      <button
+        onclick="window.print()"
+        class="no-print shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z" />
+        </svg>
+        Imprimir / Guardar PDF
+      </button>
+    </header>
+
+    <!-- Calculadora rápida por m² -->
+    <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="mb-4">
+        <h2 class="text-lg font-semibold text-slate-900">Calculadora rápida de insumos por m²</h2>
+        <p class="text-xs text-slate-500">Ajusta tus medidas antes de imprimir para llevar las cantidades exactas a la ferretería.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+        <label class="block">
+          <span class="text-xs font-medium text-slate-700">Área raspada a estucar (m²)</span>
+          <input
+            id="areaEstuco"
+            type="number"
+            min="0.5"
+            max="100"
+            step="0.5"
+            value="2"
+            oninput="calcular()"
+            class="mt-1.5 w-full px-3 py-2 rounded-lg text-sm bg-white text-slate-900 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400"
+          />
+        </label>
+        <label class="block">
+          <span class="text-xs font-medium text-slate-700">Área total a pintar con vinilo (m²)</span>
+          <input
+            id="areaPintura"
+            type="number"
+            min="0.5"
+            max="150"
+            step="0.5"
+            value="12"
+            oninput="calcular()"
+            class="mt-1.5 w-full px-3 py-2 rounded-lg text-sm bg-white text-slate-900 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400"
+          />
+        </label>
+      </div>
+
+      <div id="resultadoCalc" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+    </section>
+
+    <!-- Checklist de compras: Fijos vs Por m² -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h2 class="text-lg font-semibold text-slate-900 mb-1">1. Herramientas y fijos</h2>
+        <p class="text-xs text-slate-500 mb-4">No cambian con el tamaño del área.</p>
+        <ul class="space-y-2.5 text-sm">
+          <li class="flex items-start gap-2.5">
+            <input type="checkbox" class="mt-1 rounded border-slate-300" />
+            <span><strong>Espátula metálica (3" o 4"):</strong> para raspar lo suelto y estucar.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <input type="checkbox" class="mt-1 rounded border-slate-300" />
+            <span><strong>Brocha (2" o 3"):</strong> para limpiar polvillo y recortar bordes.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <input type="checkbox" class="mt-1 rounded border-slate-300" />
+            <span><strong>Rodillo de felpa:</strong> 4" para parche o 9" con bandeja y extensión para techo completo.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <input type="checkbox" class="mt-1 rounded border-slate-300" />
+            <span><strong>Plástico / cartón y cinta de enmascarar:</strong> para cubrir piso y muebles.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <input type="checkbox" class="mt-1 rounded border-slate-300" />
+            <span><strong>Trapo seco</strong> (para limpiar polvo) y <strong>escalera estable</strong>.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h2 class="text-lg font-semibold text-slate-900 mb-1">2. Materiales por metro cuadrado</h2>
+        <p class="text-xs text-slate-500 mb-4">Rendimientos de referencia en ferretería.</p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500">
+                <th class="py-2 pr-2 font-semibold">Material</th>
+                <th class="py-2 font-semibold">Rendimiento</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-sm">
+              <tr>
+                <td class="py-2 pr-2 font-medium">Lija #120/#150 y #220</td>
+                <td class="py-2 text-slate-600">1 pliego c/u por cada 2–4 m²</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-2 font-medium">Sellador acrílico (1 mano)</td>
+                <td class="py-2 text-slate-600">1 cuarto (~0.95 L) cubre 9–12 m²</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-2 font-medium">Estuco plástico (2 capas finas)</td>
+                <td class="py-2 text-slate-600">~1–1.5 kg/m² (1/4 gal = ~1.5 m²)</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-2 font-medium">Vinilo (2 manos)</td>
+                <td class="py-2 text-slate-600">1 cuarto = 4–6 m² | 1 galón = 15–22 m²</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Estuco normal vs especial + Marcas comerciales -->
+    <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-5">
+      <div>
+        <h2 class="text-lg font-semibold text-slate-900 mb-1">3. ¿Estuco normal o especial? y Nombres comerciales</h2>
+        <p class="text-xs text-slate-500">Cómo pedirlos en ferreterías de Montería.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="font-semibold text-slate-900 mb-1">Estuco plástico normal (Interior)</div>
+          <p class="text-xs text-slate-600">
+            <strong>Sí sirve</strong> si el techo está seco. Es más económico y fácil de lijar. Se ablanda si llega a haber humedad.
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="font-semibold text-slate-900 mb-1">Estuco acrílico / exterior (Preferido)</div>
+          <p class="text-xs text-slate-600">
+            Recomendado en Montería (baños, cocinas o cuartos con aire acondicionado). Resiste mejor vapor y humedad; es un poco más duro al lijar.
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="font-semibold text-slate-900 mb-1">Cuál evitar</div>
+          <p class="text-xs text-slate-600">
+            <strong>No usar estuco en polvo a base de yeso</strong> (ni yeso solo): absorbe humedad rápido y se deshace.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-200">
+        <h3 class="text-sm font-semibold text-slate-900 mb-2">Lista rápida para identificar en ferretería (Técnico vs. Comercial)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500">
+                <th class="py-2 pr-3 font-semibold">Nombre técnico / genérico</th>
+                <th class="py-2 pr-3 font-semibold">Nombres comerciales conocidos</th>
+                <th class="py-2 font-semibold">Cómo pedirlo / Qué evitar</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+              <tr>
+                <td class="py-2 pr-3 font-medium">Sellador / Imprimante acrílico base agua</td>
+                <td class="py-2 pr-3">Pintuco <strong>Sellomax</strong> o <strong>Imprimax</strong>, <strong>SikaWall Imprimante</strong>, Sellador Sapolin/Corona, o <strong>Acronal</strong> (para diluir)</td>
+                <td class="py-2 text-slate-600">En tarro líquido (1/4 o galón). <em>Evitar:</em> tubos de silicona o poliuretano de 300 ml.</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-3 font-medium">Estuco plástico acrílico (listo para usar)</td>
+                <td class="py-2 pr-3">Corona <strong>Estucor Listo</strong> (Interior/Exterior), Pintuco <strong>Estuco Profesional</strong>, <strong>SikaWall Estuco Acrílico</strong>, Sapolin / Tito Pabón</td>
+                <td class="py-2 text-slate-600">1/4 galón o bolsa 1 kg (preferir Exterior/Acrílico). <em>Evitar:</em> estuco en polvo de yeso.</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-3 font-medium">Pintura látex / Vinilo base agua</td>
+                <td class="py-2 pr-3">Pintuco <strong>Viniltex</strong> (Tipo 1) o <strong>Intervinil</strong> (Tipo 2), Vinilo Tipo 1/2 Sapolin, Corona o Tito Pabón</td>
+                <td class="py-2 text-slate-600">Blanco mate para cielo raso (Tipo 1 o antihongos si hay vapor).</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-3 font-medium">Lija abrasiva por grano</td>
+                <td class="py-2 pr-3"><strong>Abracol</strong> o <strong>3M</strong> (lija de agua o lija roja)</td>
+                <td class="py-2 text-slate-600">Pedir por número: <strong>#120 / #150</strong> (bordes) y <strong>#220 / #240</strong> (afinar estuco).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paso a paso -->
+    <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-slate-900 mb-4">4. Paso a paso de ejecución</h2>
+      <ol class="space-y-3 text-sm">
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">1</span>
+          <div><strong>Proteger y raspar:</strong> Cubre piso/muebles. Con la espátula, raspa toda la pintura soplada o floja hasta llegar a zona firme.</div>
+        </li>
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">2</span>
+          <div><strong>Lijar bordes y quitar polvo:</strong> Pasa lija <strong>#120 o #150</strong> en los bordes de la pintura vieja para suavizar el escalón. Limpia todo el polvillo con brocha seca y trapo.</div>
+        </li>
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">3</span>
+          <div><strong>Aplicar sellador acrílico:</strong> Aplica 1 mano sobre la zona raspada y unos centímetros alrededor. Deja secar <strong>2 a 4 horas</strong>.</div>
+        </li>
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">4</span>
+          <div><strong>Estucar y dejar secar:</strong> Aplica estuco plástico en capas finas con la espátula hasta nivelar. Deja secar bien (<strong>4 horas a 1 día</strong> según grosor).</div>
+        </li>
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">5</span>
+          <div><strong>Lijar fino y limpiar:</strong> Pasa lija <strong>#220</strong> suavemente hasta dejar liso al tacto y limpia el polvo por completo.</div>
+        </li>
+        <li class="flex gap-3">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xs font-bold">6</span>
+          <div><strong>Pintar (2 manos de vinilo):</strong> Aplica la primera mano (opcional: ligeramente diluida sobre el estuco), deja secar <strong>2 a 4 horas</strong> y aplica la segunda mano.</div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Mano de obra -->
+    <section class="print-card avoid-break bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <h2 class="text-lg font-semibold text-slate-900 mb-3">5. Rango de precio de mano de obra (Montería, sin materiales)</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="text-xs text-slate-500 mb-1">Arreglo puntual (solo el parche)</div>
+          <div class="text-xl font-bold text-slate-900">$100.000 – $160.000 COP</div>
+          <p class="text-xs text-slate-600 mt-1">Raspar, sellar, estucar y pintar únicamente la zona afectada.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="text-xs text-slate-500 mb-1">Parche + cielo raso completo (10–16 m²)</div>
+          <div class="text-xl font-bold text-slate-900">$160.000 – $280.000+ COP</div>
+          <p class="text-xs text-slate-600 mt-1">Varía según altura del techo, si requiere andamio o si es drywall con molduras.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function calcular() {
+      const aEstuco = Math.max(0.5, parseFloat(document.getElementById('areaEstuco').value) || 0.5);
+      const aPintura = Math.max(0.5, parseFloat(document.getElementById('areaPintura').value) || 0.5);
+
+      const estucoKg = aEstuco * 1.25;
+      let estucoTxt = estucoKg <= 1.5 ? '1 cuarto (o 1 kg)' : estucoKg <= 6 ? '1 galón (~5-6 kg)' : Math.ceil(estucoKg / 25) + ' cuñete(s)';
+
+      const selladorTxt = aPintura <= 10 ? '1 cuarto (1/4 gal)' : aPintura <= 40 ? '1 galón' : Math.ceil(aPintura / 40) + ' galones';
+
+      let viniloTxt = '';
+      if (aPintura <= 5) viniloTxt = '1 cuarto (1/4 gal)';
+      else if (aPintura <= 20) viniloTxt = '1 galón';
+      else if (aPintura <= 40) viniloTxt = '2 galones (o 1/2 cuñete)';
+      else viniloTxt = Math.ceil(aPintura / 85) + ' cuñete(s)';
+
+      const pliegos = Math.max(1, Math.ceil(Math.max(aEstuco, aPintura * 0.4) / 3));
+
+      const items = [
+        { label: 'Estuco plástico', val: estucoTxt, sub: `Para ~${aEstuco} m² raspados` },
+        { label: 'Sellador acrílico', val: selladorTxt, sub: `Para ~${aPintura} m² (1 mano)` },
+        { label: 'Vinilo (2 manos)', val: viniloTxt, sub: `Para ~${aPintura} m² totales` },
+        { label: 'Lijas (#150 y #220)', val: `${pliegos} pliego(s) c/u`, sub: 'Lija de agua o roja' }
+      ];
+
+      document.getElementById('resultadoCalc').innerHTML = items.map(i => `
+        <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+          <div class="text-xs text-slate-500">${i.label}</div>
+          <div class="text-sm font-bold text-slate-900 mt-0.5">${i.val}</div>
+          <div class="text-xs text-slate-500 mt-0.5">${i.sub}</div>
+        </div>
+      `).join('');
+    }
+    calcular();
+  </script>
+</body>
+</html>
